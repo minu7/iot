@@ -136,27 +136,6 @@ public class Interface {
 		}
 	}
 	
-	public static void getAllActuators() {
-		for(int i = 0; i < Server.regResources.size(); i++) {
-			if(Server.regResources.get(i).getPath().contains("actuators")) {
-				RegisteredResource r = Server.regResources.get(i);
-				String response = r.get(MediaTypeRegistry.APPLICATION_JSON).getResponseText();
-				try {
-					JSONObject msg = (JSONObject)JSONValue.parseWithException(response);
-					long pur = (Long)msg.get("purification_mode");
-					if(pur == 1) {
-						System.out.println("Actuator on " + r.getName() + " is on");
-					}else {
-						System.out.println("Actuator on " + r.getName() + " is off");
-					}
-					
-				}catch(org.json.simple.parser.ParseException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-	
 	public static void setMaxTemp(String node, Double maxTemp) {
 		for (RegisteredResource resource : Server.regResources) {
 			if (node.equals(resource.getName()) && resource.getPath().contains("actuators")) {
