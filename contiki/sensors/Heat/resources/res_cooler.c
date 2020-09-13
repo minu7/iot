@@ -32,7 +32,7 @@ RESOURCE(res_cooler,
 
 static void res_post_put_handler(coap_message_t *request, coap_message_t *response, uint8_t *buffer, uint16_t preferred_size, int32_t *offset){
 	if (request != NULL) {
-		LOG_DBG("received POST/PUT");
+		LOG_DBG("received POST/PUT \n");
 	}
 	int success = 1;
 	size_t len_mode;

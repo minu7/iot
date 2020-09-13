@@ -42,11 +42,11 @@ public class Interface {
 					break;
 		
 				case "get": //get the info from a sensor or an actuator
-					if(command[1].contentEquals("all") && command[2].equals("sensors")) {
+					if (command[1].contentEquals("all") && command[2].equals("sensors")) {
 						getAll("sensors");
-					}else if(command[1].contentEquals("all") && command[2].equals("actuators")) {
+					} else if (command[1].contentEquals("all") && command[2].equals("actuators")) {
 						getAll("actuators");
-					}else if (command[3].equals("sensor")) {
+					} else if (command[3].equals("sensor")) {
 						getStatus(command[1] + " " + command[2], "sensors");
 					} else {
 						getStatus(command[1] + " " + command[2], "actuators");
@@ -54,7 +54,7 @@ public class Interface {
 					
 					break;
 
-				case "set": //set the status of a sensor/all sensors
+				case "set":
 					if (!command[1].contentEquals("all")) {
 						setMaxTemp(command[1] + " " + command[2], new Double(command[3])); //set a specific actuator
 					} else {
@@ -96,7 +96,7 @@ public class Interface {
 	public static void getStatus(String node, String type) {
 		for (RegisteredResource resource : Server.regResources) {
 			// in path the type is explicited
-			if(node.equals(resource.getName()) && (resource.getPath().contains(type))){
+			if (node.equals(resource.getName()) && (resource.getPath().contains(type))) {
 				String response = resource.get(MediaTypeRegistry.APPLICATION_JSON).getResponseText();
 				try {
 					JSONObject msg = (JSONObject) JSONValue.parseWithException(response);
@@ -108,7 +108,7 @@ public class Interface {
 						System.out.println(s);
 					}
 					return;
-				}catch (org.json.simple.parser.ParseException e) {
+				} catch (org.json.simple.parser.ParseException e) {
 					e.printStackTrace();
 				}
 			}
@@ -170,10 +170,6 @@ public class Interface {
 	
 	public static void viewHistoric(String node) {
 		for(RegisteredResource r  : Server.regResources) {
-			// System.out.println(r.getName());
-			// System.out.println(r.getPath());
-			// System.out.println(node.equals(r.getName()));
-			// System.out.println(r.getPath().contains("sensors"));
 			if (node.equals(r.getName()) && (r.getPath().contains("sensors"))){
 				System.out.println(r.obsRes);
 				break;
@@ -192,7 +188,7 @@ public class Interface {
 				}
 				if (command[1].equals("all") && (command[2].equals("sensors") || command[2].equals("actuators"))) {
 					return true;
-				} else if(command[1].equals("node") && (command[3].equals("sensor") || command[3].equals("actuator"))) {
+				} else if (command[1].equals("node") && (command[3].equals("sensor") || command[3].equals("actuator"))) {
 					return true;
 				} else {
 					return false;
@@ -206,7 +202,7 @@ public class Interface {
 					if (Utils.isNumeric(command[3])) {
 						return true;
 					}
-				} else if(command[1].equals("all")){
+				} else if (command[1].equals("all")) {
 					return true;
 				} else {
 					return false;

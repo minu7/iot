@@ -26,24 +26,16 @@ public class Registrant extends CoapResource {
 		
 		//System.out.println(response);
 		String[] resources = response.split("\n");
-		for(int i = 0; i < resources.length; i++) {
+		for (int i = 0; i < resources.length; i++) {
 			String[] parameters = resources[i].split(";");
-			if(resources[i].contains("</.well-known/core>;")){
+			if (resources[i].contains("</.well-known/core>;")) {
 				path = parameters[1].split(",");
 				title = parameters[2];
-				if(parameters.length == 6) {
-					obs = true;
-				}else {
-					obs = false;
-				}
+				obs = (parameters.length == 6);
 			} else {
 				path = parameters[0].split(",");
 				title = parameters[1];
-				if(parameters.length == 5) {
-					obs = true;
-				} else {
-					obs = false;
-				}
+				obs = (parameters.length == 5);
 			}
 
 			RegisteredResource newOne = new RegisteredResource(path[1].replace("<", "").replace(">", ""), title, address.toString().replace("/",""), obs);

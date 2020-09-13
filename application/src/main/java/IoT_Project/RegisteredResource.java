@@ -26,9 +26,9 @@ public class RegisteredResource extends CoapClient {
 		this.setURI(this.uri);
 		this.isObservable = isObs;
 		
-		if(path.contains("sensors")) {
+		if (path.contains("sensors")) {
 			this.type = "sensor";
-		}else {
+		} else {
 			this.type = "actuator";
 		}
 		

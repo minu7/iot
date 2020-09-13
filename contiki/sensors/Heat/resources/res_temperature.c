@@ -16,7 +16,7 @@
 static void res_get_handler(coap_message_t *request, coap_message_t *response, uint8_t *buffer, uint16_t preferred_size, int32_t *offset);
 static void res_event_handler(void);
 
-double temperature = 27;
+double temperature = 30;
 bool cooling = false;
 int cycles_of_active_cooling = 0; //number of time observing function is triggered
 
@@ -37,7 +37,7 @@ EVENT_RESOURCE(res_temperature,
 
 static void res_event_handler(void) {
 	if (temperature > max_temp || forced_cooling) {
-		temperature -= ((double)rand() / RAND_MAX) * 0.3 + 0.1;
+		temperature -= ((double)rand() / RAND_MAX) * 2 + 0.1;
 		cooling = true;
 		cycles_of_active_cooling = cycles_of_active_cooling + 1;
 	} else {
@@ -57,8 +57,8 @@ static void res_event_handler(void) {
 		LOG_DBG("VERDE\n");
 	}
 	coap_notify_observers(&res_temperature);
-	LOG_DBG("%lf", temperature);
-	LOG_DBG("%d", cycles_of_active_cooling);
+	LOG_DBG("%lf \n", temperature);
+	LOG_DBG("%d \n", cycles_of_active_cooling);
 
 }
 

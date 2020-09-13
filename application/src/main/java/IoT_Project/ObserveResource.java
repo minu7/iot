@@ -13,9 +13,7 @@ import org.eclipse.californium.core.CoapResponse;
 public class ObserveResource implements CoapHandler {
 	Queue<SensorInfo> sensored_values = new LinkedList<SensorInfo>();
 	private String name;
-	// int numIns = 0;
 	int max_size = 35;
-	boolean yellow_alert = false;
 	
 	public ObserveResource(String name) {
 		super();
@@ -45,19 +43,6 @@ public class ObserveResource implements CoapHandler {
 			tmp += s + "\n";
 		}
 		return tmp;
-	}
-
-	public void printAlert(String lev, String val, Timestamp t) {
-		if(lev.equals("YELLOW")) {
-			if(!yellow_alert) {
-				System.out.println("Alert level: " + lev + " on " + name + ", carbon dioxide level:" + val + " at " + t);
-				yellow_alert =true;
-			}else {
-				yellow_alert=false;
-			}
-		}else {
-			System.out.println("Alert level: " + lev + " on " + name + ", carbon dioxide level:" + val + " at " + t);
-		}	
 	}
 	
 	@Override
