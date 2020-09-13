@@ -24,7 +24,7 @@ static void res_get_handler(coap_message_t *request, coap_message_t *response, u
 static void res_post_put_handler(coap_message_t *request, coap_message_t *response, uint8_t *buffer, uint16_t preferred_size, int32_t *offset);
 
 RESOURCE(res_cooler,
-	 "title=\"Air cooler\";methods=\"GET/POST/PUT\"max_temp=double\";rt=\"json\"\n",
+	 "title=\"Air cooler\";methods=\"GET/POST/PUT\"max_temp=double\";rt=\"actuator\"\n",
 	 res_get_handler,
 	 res_post_put_handler,
 	 res_post_put_handler,

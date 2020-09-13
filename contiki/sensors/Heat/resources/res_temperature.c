@@ -28,7 +28,7 @@ enum signals warn_level = GREEN;
 extern int sensor_period;
 
 EVENT_RESOURCE(res_temperature,
-		       "title=\"Temperature sensor\";methods=\"GET\";rt=\"json\";obs\n",
+		       "title=\"Temperature sensor\";methods=\"GET\";rt=\"sensor\";obs\n",
 		        res_get_handler,
 		        NULL,
 		        NULL,
